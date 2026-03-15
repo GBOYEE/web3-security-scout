@@ -23,4 +23,4 @@ This project embodies RLHF principles: human‑in‑the‑loop feedback, iterati
 
 [Link to demo video coming soon]
 
-GitHub: https://github.com/GBOYEE/bounty-hunter
+GitHub: https://github.com/GBOYEE/web3-security-scout
