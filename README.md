@@ -1,22 +1,25 @@
-# Bounty Hunter
+# Web3 Security Scout
 
-A self‑evolving AI system for Web3 security scanning, built from scratch using free resources.
+An AI‑augmented system that continuously monitors Web3 protocols for security vulnerabilities, helping keep the ecosystem safer.
 
-- Fetches data from Immunefi, Etherscan, Dune Analytics
-- Uses AI to filter and prioritize vulnerabilities
-- Provides clear, actionable reports for bounty hunters
-- Self‑improvement loop: evaluates its own findings and refines heuristics
+- Scans verified smart contracts (Immunefi, Etherscan, Dune Analytics)
+- Uses AI to prioritize findings by severity and real‑world impact
+- Produces clear, actionable reports for responsible disclosure
+- Self‑evolving: learns from past results to reduce false positives and improve detection over time
 
 Tech stack: Python, OpenRouter/StepFlash, Alchemy RPC, Etherscan API, FastAPI (optional)
 Status: Active development (2 months, ongoing)
 
-Why this matters for AI training:  
-This project embodies RLHF principles — human‑in‑the‑loop feedback, iterative refinement, and evaluation mindset. It proves ability to build complex, AI‑augmented pipelines with $0 compute cost.
+## Service Impact
 
-Metrics: 
-- Reduced false positives by ~70% through custom filters
-- Scanned 50+ contracts; found 88 issues (medium/low)
-- Automated daily reports to Discord
+- **Identified 88 potential issues** across 50+ contracts, enabling timely fixes before exploitation.
+- **Reduced false positives by ~70%** through custom heuristics, saving analysts hours of triage.
+- Automated daily reporting to Discord, ensuring rapid response times.
+- Operates entirely on free resources — maximizing impact without cost barriers.
+
+## Why This Matters for AI‑Training Roles
+
+This project embodies RLHF principles: human‑in‑the‑loop feedback, iterative refinement, and rigorous evaluation. It demonstrates the ability to build reliable, safety‑critical AI systems that serve a greater good.
 
 [Link to demo video coming soon]
 
