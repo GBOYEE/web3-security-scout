@@ -29,6 +29,11 @@ try:
 except ImportError:
     HAS_WEB3 = False
 
+# Cache: known proxy address (lowercase) -> local implementation source file path (relative to workspace)
+PROXY_CACHE = {
+    "0x87870bca3f3fd6335c3f4ce8392d69350b4fa4e2": "cached_aave_v3_impl.sol"
+}
+
 # ----------------------------------------------------------------------
 # Config & Setup
 # ----------------------------------------------------------------------
@@ -128,7 +133,18 @@ def get_implementation_address(address: str) -> Optional[str]:
     return None
 
 def fetch_source_code(address: str) -> str:
-    """Fetch Solidity source from Etherscan."""
+    """Fetch Solidity source from Etherscan, with optional local cache for known proxies."""
+    # Check cache first (case-insensitive address)
+    addr_lower = address.lower()
+    if addr_lower in PROXY_CACHE:
+        cache_file = REPORTS_DIR.parent / PROXY_CACHE[addr_lower]  # repo root
+        if cache_file.exists():
+            logging.info(f"Loading cached source for {address} from {cache_file}")
+            return cache_file.read_text()
+        else:
+            logging.warning(f"Cache entry for {address} but file not found: {cache_file}")
+
+    # Fall back to Etherscan API
     params = {
         "module": "contract",
         "action": "getsourcecode",
@@ -163,10 +179,9 @@ def fetch_source_code(address: str) -> str:
 # ----------------------------------------------------------------------
 def evaluate_vulnerability(source_code: str, contract_address: str = "") -> Dict[str, Any]:
     """
-    Placeholder AI evaluation. Replace with real OpenRouter call or static analysis.
+    Heuristic analysis to spot common vulnerability patterns.
     Returns dict with severity_score, issues, confidence, bug_type.
     """
-    # Simple heuristic scan for demonstration
     issues = []
     severity = 0.0
     bug_type = None
@@ -179,13 +194,25 @@ def evaluate_vulnerability(source_code: str, contract_address: str = "") -> Dict
         "integer_overflow": (["unchecked", "++", "--"], 2.0)  # naive
     }
 
+    lines = source_code.splitlines()
     for btype, (keywords, score) in patterns.items():
+        found = False
         for kw in keywords:
-            if kw in source_code:
-                issues.append(f"Potential {btype} pattern detected: '{kw}'")
-                severity = max(severity, score)
-                bug_type = btype
-                break  # one match per type
+            for line in lines:
+                if kw in line:
+                    if btype == "unchecked_low_level_call":
+                        # Exclude safe patterns: require after call on same line
+                        after_kw = line.split(kw, 1)[1] if kw in line else ""
+                        if "require(" in after_kw:
+                            continue  # likely safe
+                    # For reentrancy we don't filter yet
+                    issues.append(f"Potential {btype} pattern detected: '{kw}'")
+                    severity = max(severity, score)
+                    bug_type = btype
+                    found = True
+                    break
+            if found:
+                break
 
     confidence = 0.7 if issues else 0.95
     return {
@@ -327,14 +354,12 @@ def send_discord_alert(webhook_url: str, finding: Dict):
 # ----------------------------------------------------------------------
 def fetch_contracts(limit: int = 50) -> List[Dict]:
     """
-    Mock fetching contracts. Replace with real Etherscan 'contractlist' or Dune query.
-    Here we return a fixed list of known proxy contracts for demo.
+    Target specific high-value contracts. Replace with real Etherscan query as needed.
     """
-    logging.info("Fetching contract list (mock)...")
-    # In production: query Etherscan for verified contracts or use Dune
+    logging.info("Fetching target contracts...")
+    # Aave V3 Pool Proxy (Ethereum mainnet)
     return [
-        {"address": "0xAaa...", "name": "AaveV3Proxy"},
-        {"address": "0xBbb...", "name": "PendleProxy"},
+        {"address": "0x87870Bca3F3fD6335C3f4ce8392D69350b4fA4E2", "name": "Aave V3 Pool Proxy"}
     ]
 
 def process_contract(contract: Dict) -> Optional[Dict]:
