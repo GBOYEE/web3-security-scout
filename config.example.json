@@ -1,0 +1,9 @@
+{
+  "openrouter_api_key": "YOUR_OPENROUTER_KEY",
+  "etherscan_api_key": "YOUR_ETHERSCAN_KEY",
+  "discord_webhook": "YOUR_DISCORD_WEBHOOK_URL",
+  "scan_interval_seconds": 3600,
+  "min_severity_score": 1.0,
+  "max_batch_size": 50,
+  "false_positive_threshold": 0.7
+}
