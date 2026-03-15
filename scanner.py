@@ -21,6 +21,7 @@ import logging
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from datetime import datetime
+import requests
 
 # Try to import web3; if not present, we'll use Etherscan-only proxy detection
 try:
@@ -431,4 +432,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-"""
