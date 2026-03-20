@@ -8,6 +8,7 @@ Automated bug bounty scanner for Web3 protocols. Integrated with OpenClaw hive.
 ## Features
 - Continuous monitoring of Immunefi and HackerOne
 - Smart contract analysis using `web3-security-scout` skill
+- **Severity scoring** (CVSS‑inspired) with aggregate risk label per scan
 - PoC generation for eligible bounties
 - Seamless integration with OpenClaw agents
 
@@ -17,6 +18,15 @@ pip install -r requirements.txt
 export IMMUNEFI_API_KEY=your_key
 python -m web3_security_scout.scan
 ```
+
+## Severity Scoring
+The scout assigns a CVSS-inspired 0–10 score to each finding and computes an aggregate severity for the whole scan. Labels:
+- **Critical** (≥9.0)
+- **High** (7.0–8.9)
+- **Medium** (4.0–6.9)
+- **Low** (<4.0)
+
+Use `w3-scout --json` for machine-readable output.
 
 ## Configuration
 See `docs/` for detailed setup.
