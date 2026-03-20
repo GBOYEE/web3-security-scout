@@ -2,8 +2,11 @@
 
 Automated bug bounty scanner for Web3 protocols. Integrated with OpenClaw hive.
 
-[![Open Issues](https://img.shields.io/github/issues-raw/YOUR_USER/web3-security-scout)](https://github.com/YOUR_USER/web3-security-scout/issues)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/YOUR_USER?label=Sponsor%20%26%20Support)](https://github.com/sponsors/YOUR_USER)
+[![CI](https://github.com/GBOYEE/web3-security-scout/actions/workflows/ci.yml/badge.svg)](https://github.com/GBOYEE/web3-security-scout/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/badge/coverage-untested-lightgrey)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Issues](https://img.shields.io/github/issues-raw/GBOYEE/web3-security-scout)](https://github.com/GBOYEE/web3-security-scout/issues)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/GBOYEE?label=Sponsor%20%26%20Support)](https://github.com/sponsors/GBOYEE)
 
 ## Features
 - Continuous monitoring of Immunefi and HackerOne
