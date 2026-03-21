@@ -5,7 +5,8 @@ from .severity import classify, aggregate_score, severity_label
 
 # Simple regex patterns for demo purposes. Production should use Slither or similar.
 PATTERNS = {
-    "reentrancy": r"\bcall\s*\(\s*value\s*:\s*[^,)]+\s*\)\s*(?!.*returns?\(.*\bboolean\b)",
+    # Detect low-level call forwarding value: both .call{value: ...} and call(value: ...)
+    "reentrancy": r"\bcall\s*(?:{|\()\s*value\s*:\s*[^,)]+\s*(?:}|\))",
     "unchecked_low_level_call": r"\b(?:call\|delegatecall\|staticcall)\s*\([^)]*\)\s*(?!\s*returns?\([^)]*\bboolean\b)",
     "integer_overflow": r"\b(\w+)\s*\+\=?\s*(\w+)\s*;",
     "timestamp_dependency": r"\bblock\.timestamp\b",
