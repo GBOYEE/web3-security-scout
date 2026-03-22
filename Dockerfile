@@ -13,7 +13,4 @@ COPY src ./src
 COPY tests ./tests
 COPY data ./data
 
-# Optional: copy .env file
-# COPY .env .env
-
 CMD ["pytest", "--cov=src", "-v", "tests/"]

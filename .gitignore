@@ -1,8 +1,8 @@
 # Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.so
 .Python
 env/
 venv/
@@ -12,18 +12,24 @@ pip-delete-this-directory.txt
 .tox/
 .coverage
 .coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
+htmlcov/
+*.pot
+*.mo
 *.log
+*.sqlite
+*.db
+*.sqlite3
+*.egg-info/
+dist/
+build/
+__pypackages__/
+
+# IDEs
 .idea/
 .vscode/
-*.sqlite
-.DS_Store
+*.swp
+*.swo
 
-# Project-specific
-data/
-models/
-contracts/
-*.sol
+# OS
+.DS_Store
+Thumbs.db
