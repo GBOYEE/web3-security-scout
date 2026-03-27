@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "web3-security-scout"
+version = "0.1.0"
+description = "AI-augmented smart contract security scanner"
+authors = [{name="GBOYEE"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+scanner = "scanner.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["scanner*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--cov=scanner", "--cov-report=term"]
