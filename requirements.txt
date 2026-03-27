@@ -1,0 +1,3 @@
+# Minimal runtime
+# No external deps for core; optional LLM integration installs separately
+pytest>=7.0
