@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Xander Maintainer CLI wrapper
+# Usage: xander-maintainer review <PR_URL> [--output report.md]
+
+set -euo pipefail
+
+cd /root/.openclaw/workspace
+
+# Ensure environment
+source .env 2>/dev/null || true
+export PATH="$PATH:/root/.openclaw/workspace/polish/xander-operator/.venv/bin"
+
+python3 products/xander-maintainer/review_pr.py "$@"

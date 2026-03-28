@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""
+xander review <PR_URL> — AI PR review generator
+
+Outputs a Markdown report to stdout.
+Exit codes: 0 = success, 1 = error
+"""
+
+import os
+import sys
+import json
+import argparse
+from pathlib import Path
+from datetime import datetime
+
+# Ensure xander-operator is importable
+sys.path.insert(0, str(Path(__file__).parent.parent / "polish" / "xander-operator"))
+
+from xander_operator import TaskStore
+from xander_operator.llm import generate_response
+
+def parse_pr_url(url: str) -> tuple[str, int]:
+    """Extract owner/repo and PR number from GitHub URL."""
+    # https://github.com/owner/repo/pull/123
+    parts = url.strip().split("/")
+    if "pull" not in parts:
+        raise ValueError("Not a valid PR URL")
+    idx = parts.index("pull")
+    owner = parts[idx-2]
+    repo = parts[idx-1]
+    number = int(parts[idx+1])
+    return f"{owner}/{repo}", number
+
+def fetch_pr_data(owner_repo: str, pr_number: int) -> dict:
+    """Fetch PR details via gh CLI."""
+    import subprocess
+    cmd = [
+        "gh", "pr", "view", str(pr_number),
+        "--repo", owner_repo,
+        "--json", "title,body,user,base,head,files,comments,reviews",
+        "--jq", "."
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"gh failed: {result.stderr}")
+    return json.loads(result.stdout)
+
+def fetch_pr_diff(owner_repo: str, pr_number: int) -> str:
+    """Get unified diff of the PR."""
+    import subprocess
+    cmd = [
+        "gh", "pr", "diff", str(pr_number),
+        "--repo", owner_repo
+    ]
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"gh diff failed: {result.stderr}")
+    return result.stdout
+
+def build_review_prompt(pr_data: dict, diff: str) -> str:
+    title = pr_data["title"]
+    body = pr_data.get("body", "(no description)")
+    author = pr_data["user"]["login"]
+    files_changed = len(pr_data.get("files", []))
+    base = pr_data["base"]["ref"]
+    head = pr_data["head"]["ref"]
+
+    prompt = f"""
+You are a senior code reviewer. Analyze this pull request thoroughly.
+
+## Context
+
+Repository: {owner_repo}
+PR #{pr_number}: {title}
+Author: {author}
+Branch: {head} → {base}
+
+## Description
+
+{body}
+
+## Changed Files
+
+{files_changed} files changed.
+
+## Diff
+
+```diff
+{diff}
+```
+
+## Task
+
+Provide a structured review in **Markdown** with these sections:
+
+1. **Summary** (2-3 sentences)
+2. **Potential Bugs** (list any logic errors, race conditions, edge cases)
+3. **Security Concerns** (injection, auth bypass, reentrancy, etc.)
+4. **Suggestions** (improvements, better patterns, refactoring ideas)
+5. **Test Coverage Gaps** (are new features tested?)
+6. **Final Verdict** ( approve / request changes / comment )
+
+Be concise but specific. Reference file names and line numbers when possible.
+
+Output only Markdown. No extra commentary.
+""".strip()
+    return prompt
+
+def generate_report(pr_data: dict, diff: str) -> str:
+    owner_repo = f"{pr_data['user']['login']}/{pr_data['base']['repo']['name']}"  # approximate
+    pr_number = pr_data.get('number', '?')
+    prompt = build_review_prompt(pr_data, diff)
+
+    # Use LLM
+    model = os.getenv("OPENAI_MODEL", "stepfun/step-1-flash")
+    response = generate_response(prompt, model=model, max_tokens=2000, temperature=0.3)
+    if not response:
+        raise RuntimeError("LLM failed to generate review")
+
+    # Compose final report
+    report = f"""# AI PR Review
+
+> PR #{pr_number}: {pr_data['title']}
+> Repository: {owner_repo}
+> Generated: {datetime.now():%Y-%m-%d %H:%M}
+
+{response}
+
+---
+
+**Metadata**
+- Author: {pr_data['user']['login']}
+- Base: {pr_data['base']['ref']}
+- Head: {pr_data['head']['ref']}
+- Files changed: {len(pr_data.get('files', []))}
+- AI model: {model}
+"""
+    return report
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate AI PR review")
+    parser.add_argument("pr_url", help="GitHub PR URL (e.g., https://github.com/owner/repo/pull/123)")
+    parser.add_argument("--output", "-o", help="Write report to file instead of stdout")
+    args = parser.parse_args()
+
+    try:
+        owner_repo, pr_number = parse_pr_url(args.pr_url)
+        print(f"Fetching PR #{pr_number} from {owner_repo}…", file=sys.stderr)
+
+        pr_data = fetch_pr_data(owner_repo, pr_number)
+        diff = fetch_pr_diff(owner_repo, pr_number)
+
+        print("Generating review with AI…", file=sys.stderr)
+        report = generate_report(pr_data, diff)
+
+        if args.output:
+            Path(args.output).write_text(report, encoding="utf-8")
+            print(f"Report saved to {args.output}", file=sys.stderr)
+        else:
+            print(report)
+
+        return 0
+
+    except Exception as e:
+        print(f"❌ Error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
+
+if __name__ == "__main__":
+    sys.exit(main())
