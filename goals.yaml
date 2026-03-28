@@ -1,0 +1,26 @@
+# Quarterly Objectives & Key Results (OKRs)
+
+objectives:
+  - title: "Establish reliable AI partnership"
+    description: "Integrate OpenClaw into daily workflow with proactive support"
+    key_results:
+      - "Complete GitHub automation by 2026-03-28"
+      - "Send 3+ daily check-ins for 30 consecutive days"
+      - "Achieve 90% task completion rate weekly"
+      - "Weekly mood/energy review completed every Sunday"
+
+  - title: "Ship web3-security-scout v1.0.0"
+    description: "Production-ready scanner with CI integration"
+    key_results:
+      - "All detectors pass test suite"
+      - "Generate HTML report with <1s latency"
+      - "Integrate with GitHub Actions for 3 repos"
+      - "Document usage in README with examples"
+
+  - title: "Personal health baseline"
+    description: "Energy and focus optimization"
+    key_results:
+      - "Sleep 7+ hours 80% of nights"
+      - "Exercise 3x/week average"
+      - "Morning routine consistent for 21 days"
+      - "Energy rating average >= 3.5/5"
