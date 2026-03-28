@@ -3,26 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GBOYEE — Autonomous AI Engineer & Security Researcher</title>
-    <meta name="description" content="GBOYEE builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps — real-world, production-grade.">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="GBOYEE — Autonomous AI Engineer">
-    <meta property="og:description" content="Builds autonomous AI agents that act, review, fix, and ship code.">
-    <meta property="og:image" content="https://207.180.223.192.nip.io/portfolio/og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GBOYEE — Autonomous AI Engineer">
-    <meta name="twitter:description" content="Builds autonomous AI agents that act, review, fix, and ship code.">
+    <title>GBOYEE — Autonomous AI Engineer</title>
+    <meta name="description" content="Builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps — production-grade systems.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="data:,">
     <style>
         :root {
-            --bg: #020617;
-            --card: rgba(30, 41, 59, 0.35);
-            --border: rgba(148, 163, 184, 0.12);
+            --bg: #050505;
+            --card: rgba(20, 25, 40, 0.4);
+            --border: rgba(165, 180, 255, 0.15);
             --accent: #22d3ee;
-            --accent2: #818cf8;
-            --text: #f8fafc;
+            --accent2: #a855f7;
+            --text: #f0f4ff;
             --text2: #94a3b8;
         }
         body {
@@ -35,6 +28,7 @@
             background: var(--card);
             backdrop-filter: blur(16px);
             border: 1px solid var(--border);
+            border-radius: 1rem;
         }
         .gradient-text {
             background: linear-gradient(135deg, var(--accent), var(--accent2));
@@ -48,7 +42,7 @@
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(34, 211, 238, 0.35);
+            box-shadow: 0 10px 30px -5px rgba(34, 211, 238, 0.4);
         }
         .nav-link {
             position: relative;
@@ -71,24 +65,42 @@
         .nav-link:hover::after, .nav-link.active::after {
             width: 100%;
         }
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15), transparent 40%),
-                        radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15), transparent 40%);
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -1;
-            animation: pulse 10s ease-in-out infinite alternate;
+            opacity: 0.6;
         }
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-flex;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         .project-card {
             transition: transform 0.25s, box-shadow 0.25s;
         }
         .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px -12px rgba(34, 211, 238, 0.15);
         }
         .tag {
             display: inline-block;
@@ -98,32 +110,34 @@
             padding: 0.25rem 0.75rem;
             font-size: 0.75rem;
             font-weight: 600;
-            margin: 0.25rem;
+            margin: 0.2rem;
         }
         a:focus-visible, button:focus-visible {
             outline: 2px solid var(--accent);
             outline-offset: 3px;
         }
         @media print {
-            header, footer, .btn-primary { display: none; }
+            #bg-canvas, header, footer { display: none; }
             body { background: white; color: #111; }
             .glass { background: white; border: 1px solid #eee; }
-            .gradient-text { background: none; color: #111; -webkit-text-fill-color: #111; }
+            .gradient-text { background: none; color: #111; }
             a { color: #111; text-decoration: underline; }
             .project-card { transform: none; box-shadow: none; }
         }
         @media (max-width: 768px) {
             .nav-menu { display: none; }
-            .mobile-menu-btn { display: flex; }
+            .mobile-btn { display: flex; }
         }
         @media (min-width: 768px) {
-            .mobile-menu-btn { display: none; }
+            .mobile-btn { display: none; }
         }
     </style>
 </head>
-<body class="antialiased selection:bg-cyan-500 selection:text-white">
+<body class="antialiased selection:bg-cyan-500 selection:text-black">
 
-<header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+<canvas id="bg-canvas"></canvas>
+
+<header class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         <a href="#" class="font-bold text-lg tracking-tight text-white">GBOYEE</a>
         <nav class="nav-menu hidden md:flex gap-8 text-sm">
@@ -134,12 +148,11 @@
         </nav>
         <div class="flex items-center gap-4">
             <a href="#contact" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold hidden sm:block">Let’s Talk</a>
-            <button class="mobile-menu-btn md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+            <button class="mobile-btn md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
         </div>
     </div>
-    <!-- Mobile menu -->
     <div id="mobile-menu" class="md:hidden hidden glass border-t border-white/10">
         <div class="px-6 py-4 space-y-3 text-sm">
             <a href="#about" class="block text-gray-300 hover:text-white">About</a>
@@ -153,24 +166,23 @@
 <main class="pt-24">
 
 <!-- Hero -->
-<section id="hero" class="relative py-32 px-6">
-    <div class="hero-bg"></div>
-    <div class="max-w-5xl mx-auto text-center relative z-10">
-        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-indigo-500/10 border border-cyan-500/20 rounded-full px-4 py-2 text-sm text-cyan-400 mb-8">
+<section id="hero" class="py-32 px-6 text-center relative">
+    <div class="max-w-5xl mx-auto">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 rounded-full px-4 py-2 text-sm text-cyan-400 mb-8">
             <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
             Autonomous AI Engineer & Security Researcher
         </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+        <h1 class="text-5xl md:text-8xl font-extrabold tracking-tight mb-6 leading-tight">
             GBOYEE
         </h1>
         <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps workflows — designed for real-world deployment.
+            Builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps — designed for real-world deployment.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="#projects" class="btn-primary px-10 py-4 text-lg font-semibold text-white rounded-2xl shadow-lg shadow-indigo-500/25 transition">
+            <a href="#projects" class="btn-primary px-10 py-4 text-lg font-semibold text-white rounded-2xl shadow-lg shadow-purple-500/25 transition">
                 View Projects
             </a>
-            <a href="#contact" class="px-10 py-4 text-lg font-medium border border-gray-700 hover:border-gray-500 rounded-2xl transition">
+            <a href="#contact" class="px-10 py-4 text-lg font-medium border border-gray-700 hover:border-cyan-500 rounded-2xl transition">
                 Get in Touch
             </a>
         </div>
@@ -178,8 +190,8 @@
 </section>
 
 <!-- About -->
-<section id="about" class="py-24 px-6 bg-gradient-to-b from-transparent to-slate-900/20">
-    <div class="max-w-3xl mx-auto">
+<section id="about" class="py-24 px-6">
+    <div class="max-w-3xl mx-auto fade-in">
         <h2 class="text-3xl font-bold mb-6">About</h2>
         <div class="space-y-6 text-gray-300 leading-relaxed">
             <p>
@@ -187,86 +199,55 @@
                 My work lives at the intersection of <strong class="text-cyan-400">LLM‑driven agents</strong>,
                 <strong class="text-cyan-400">security automation</strong>, and
                 <strong class="text-cyan-400">production‑grade infrastructure</strong>.
-                I specialize in turning research prototypes into reliable, deployable tools that solve concrete engineering problems.
             </p>
             <p>
-                From PR review agents to multi‑agent orchestration frameworks, I own the full stack:
-                prompt engineering, GitHub integration, secure webhook handling, monitoring, and deployment.
-                Security and reliability aren’t afterthoughts — they’re baked in.
+                From PR review agents to multi‑agent orchestration, I own the full stack: prompt engineering, GitHub integration, secure webhook handling, monitoring, and deployment. Security and reliability are baked in.
             </p>
         </div>
     </div>
 </section>
 
-<!-- Tech Stack -->
-<section id="stack" class="py-24 px-6">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl font-bold mb-10 text-center">Tech Stack</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            <!-- Each card is a category with tags -->
-            <div class="glass rounded-2xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">Languages</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="tag">Python</span>
-                    <span class="tag">Bash</span>
-                    <span class="tag">JS</span>
-                </div>
-            </div>
-            <div class="glass rounded-2xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">AI/ML</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="tag">Ollama</span>
-                    <span class="tag">OpenAI</span>
-                    <span class="tag">RAG</span>
-                </div>
-            </div>
-            <div class="glass rounded-2xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">Infra</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="tag">Nginx</span>
-                    <span class="tag">Docker</span>
-                    <span class="tag">Linux</span>
-                </div>
-            </div>
-            <div class="glass rounded-2xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">GitHub</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="tag">gh CLI</span>
-                    <span class="tag">API</span>
-                    <span class="tag">Webhooks</span>
-                </div>
-            </div>
-            <div class="glass rounded-2xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">Security</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="tag">HMAC</span>
-                    <span class="tag">Rate Limit</span>
-                    <span class="tag">TLS</span>
-                </div>
-            </div>
-            <div class="glass rounded-2xl p-6 text-center">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">DevOps</h3>
-                <div class="flex flex-wrap gap-2 justify-center">
-                    <span class="tag">CI/CD</span>
-                    <span class="tag">Monitoring</span>
-                    <span class="tag">Logging</span>
-                </div>
+<!-- Tech Stack Marquee -->
+<section id="stack" class="py-16 bg-gradient-to-b from-transparent to-slate-900/30">
+    <div class="max-w-7xl mx-auto fade-in">
+        <h2 class="text-2xl font-bold mb-6 text-center">Tech Stack</h2>
+        <div class="marquee">
+            <div class="marquee-content text-3xl font-bold text-gray-600">
+                <span class="mx-8">Python</span>
+                <span class="mx-8">Ollama</span>
+                <span class="mx-8">OpenAI API</span>
+                <span class="mx-8">GitHub API</span>
+                <span class="mx-8">Nginx</span>
+                <span class="mx-8">Docker</span>
+                <span class="mx-8">FastAPI</span>
+                <span class="mx-8">Playwright</span>
+                <span class="mx-8">LLM</span>
+                <span class="mx-8">RAG</span>
+                <span class="mx-8">Python</span>
+                <span class="mx-8">Ollama</span>
+                <span class="mx-8">OpenAI API</span>
+                <span class="mx-8">GitHub API</span>
+                <span class="mx-8">Nginx</span>
+                <span class="mx-8">Docker</span>
+                <span class="mx-8">FastAPI</span>
+                <span class="mx-8">Playwright</span>
+                <span class="mx-8">LLM</span>
+                <span class="mx-8">RAG</span>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Projects -->
-<section id="projects" class="py-24 px-6 bg-gradient-to-b from-transparent to-slate-900/20">
+<!-- Projects Bento Grid -->
+<section id="projects" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
         <h2 class="text-3xl font-bold mb-10 text-center">Selected Projects</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-            <!-- Xander Maintainer -->
-            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+            <article class="glass rounded-2xl p-6 project-card fade-in flex flex-col">
                 <div class="flex-1">
                     <h3 class="text-xl font-semibold mb-2">Xander Maintainer</h3>
-                    <p class="text-gray-400 text-sm mb-4">Autonomous AI PR review agent that analyzes diffs, finds bugs/security issues, and posts detailed comments.</p>
+                    <p class="text-gray-400 text-sm mb-4">Autonomous AI PR review agent. Fetches diffs, generates structured security & quality reviews using local LLMs. Production‑hardened.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tag">Python</span>
                         <span class="tag">Ollama</span>
@@ -274,7 +255,7 @@
                     </div>
                     <ul class="text-gray-300 text-xs space-y-1">
                         <li>• ~2 hour turnaround</li>
-                        <li>• Secure webhooks</li>
+                        <li>• Secure webhooks + HMAC</li>
                         <li>• Landing page + CLI</li>
                     </ul>
                 </div>
@@ -283,11 +264,10 @@
                 </div>
             </article>
 
-            <!-- xander-agent -->
-            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+            <article class="glass rounded-2xl p-6 project-card fade-in flex flex-col">
                 <div class="flex-1">
                     <h3 class="text-xl font-semibold mb-2">xander‑agent</h3>
-                    <p class="text-gray-400 text-sm mb-4">General‑purpose AI agent with browser automation, research, vector memory, and tool execution.</p>
+                    <p class="text-gray-400 text-sm mb-4">General‑purpose AI agent with browser automation, research, vector memory, and tool execution. Modular architecture.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tag">Python</span>
                         <span class="tag">Playwright</span>
@@ -296,7 +276,7 @@
                     <ul class="text-gray-300 text-xs space-y-1">
                         <li>• Browse & act</li>
                         <li>• Vector memory</li>
-                        <li>• Modular tools</li>
+                        <li>• Chat + auto modes</li>
                     </ul>
                 </div>
                 <div class="mt-6 pt-4 border-t border-white/10">
@@ -304,11 +284,10 @@
                 </div>
             </article>
 
-            <!-- openclaw-core -->
-            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+            <article class="glass rounded-2xl p-6 project-card fade-in flex flex-col">
                 <div class="flex-1">
                     <h3 class="text-xl font-semibold mb-2">OpenClaw Core</h3>
-                    <p class="text-gray-400 text-sm mb-4">Secure gateway and orchestration layer for AI agents — auth, rate limiting, health endpoints.</p>
+                    <p class="text-gray-400 text-sm mb-4">Secure gateway and orchestration layer for AI agents — auth, rate limiting, health endpoints, webhook validation.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tag">Python</span>
                         <span class="tag">FastAPI</span>
@@ -325,11 +304,10 @@
                 </div>
             </article>
 
-            <!-- HiveSec Ecosystem Hub -->
-            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+            <article class="glass rounded-2xl p-6 project-card fade-in flex flex-col">
                 <div class="flex-1">
                     <h3 class="text-xl font-semibold mb-2">HiveSec Ecosystem Hub</h3>
-                    <p class="text-gray-400 text-sm mb-4">Streamlit dashboard for multi‑agent security operations. Visualizes agent outputs and threat feeds.</p>
+                    <p class="text-gray-400 text-sm mb-4">Streamlit dashboard for multi‑agent security operations. Visualizes agent outputs, threat feeds, real‑time situational awareness.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tag">Streamlit</span>
                         <span class="tag">Python</span>
@@ -346,25 +324,65 @@
                 </div>
             </article>
 
+            <article class="glass rounded-2xl p-6 project-card fade-in flex flex-col">
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-2">web3‑security‑scout</h3>
+                    <p class="text-gray-400 text-sm mb-4">AI‑augmented smart contract vulnerability scanner. Parses Solidity, pattern + LLM analysis, CI/CD integration.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tag">Python</span>
+                        <span class="tag">Solidity</span>
+                        <span class="tag">LLM</span>
+                    </div>
+                    <ul class="text-gray-300 text-xs space-y-1">
+                        <li>• Reentrancy detection</li>
+                        <li>• Overflow checks</li>
+                        <li>• GitHub Actions</li>
+                    </ul>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10">
+                    <a href="https://github.com/GBOYEE/web3-security-scout" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">View Repository →</a>
+                </div>
+            </article>
+
+            <article class="glass rounded-2xl p-6 project-card fade-in flex flex-col">
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-2">xander‑hive‑framework</h3>
+                    <p class="text-gray-400 text-sm mb-4">Multi‑agent orchestration framework with RLHF‑style feedback loops. Coordinates autonomous agents for complex workflows.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tag">Python</span>
+                        <span class="tag">RLHF</span>
+                        <span class="tag">Agents</span>
+                    </div>
+                    <ul class="text-gray-300 text-xs space-y-1">
+                        <li>• Hierarchical management</li>
+                        <li>• Reward loops</li>
+                        <li>• Pluggable skills</li>
+                    </ul>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/10">
+                    <a href="https://github.com/GBOYEE/xander-hive-framework" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">View Repository →</a>
+                </div>
+            </article>
+
         </div>
     </div>
 </section>
 
 <!-- Contact -->
 <section id="contact" class="py-32 px-6">
-    <div class="max-w-3xl mx-auto text-center">
+    <div class="max-w-3xl mx-auto text-center fade-in">
         <h2 class="text-4xl font-bold mb-6">Let’s Build Together</h2>
         <p class="text-gray-400 mb-10 text-lg">
             I’m open to collaborations, consulting, and full‑time roles where I can deploy autonomous AI systems in production.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="mailto:you@example.com" class="btn-primary px-10 py-4 text-lg font-semibold text-white rounded-2xl shadow-lg shadow-indigo-500/25 transition">
+            <a href="mailto:you@example.com" class="btn-primary px-10 py-4 text-lg font-semibold text-white rounded-2xl shadow-lg shadow-purple-500/25 transition">
                 Email Me
             </a>
-            <a href="/portfolio/resume.txt" class="px-10 py-4 text-lg font-medium border border-gray-700 hover:border-gray-500 rounded-2xl transition">
+            <a href="/portfolio/resume.txt" class="px-10 py-4 text-lg font-medium border border-gray-700 hover:border-cyan-500 rounded-2xl transition">
                 Download Resume
             </a>
-            <a href="https://github.com/GBOYEE" target="_blank" class="px-10 py-4 text-lg font-medium border border-gray-700 hover:border-gray-500 rounded-2xl transition">
+            <a href="https://github.com/GBOYEE" target="_blank" class="px-10 py-4 text-lg font-medium border border-gray-700 hover:border-cyan-500 rounded-2xl transition">
                 GitHub
             </a>
         </div>
@@ -378,22 +396,83 @@
 </footer>
 
 <script>
-    // Mobile menu toggle
-    // Scroll spy for nav links
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - 100) {
-                current = section.getAttribute('id');
+// Canvas background: flowing particles (neural net / blockchain vibes)
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let width, height;
+let particles = [];
+
+function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 2 + 1;
+    }
+    update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(34, 211, 238, 0.6)';
+        ctx.fill();
+    }
+}
+
+for (let i = 0; i < 60; i++) particles.push(new Particle());
+
+function animate() {
+    ctx.clearRect(0, 0, width, height);
+    // Draw connections
+    for (let i = 0; i < particles.length; i++) {
+        let p1 = particles[i];
+        p1.update();
+        p1.draw();
+        for (let j = i + 1; j < particles.length; j++) {
+            let p2 = particles[j];
+            let dx = p1.x - p2.x;
+            let dy = p1.y - p2.y;
+            let dist = Math.sqrt(dx*dx + dy*dy);
+            if (dist < 150) {
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = `rgba(168, 85, 247, ${0.15 * (1 - dist/150)})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
             }
-        });
-        navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href').slice(1) === current);
-        });
+        }
+    }
+    requestAnimationFrame(animate);
+}
+animate();
+
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
     });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Mobile menu toggle
+document.querySelector('.mobile-btn').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+});
 </script>
 
 </body>
