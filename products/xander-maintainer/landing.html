@@ -2,93 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Xander Maintainer — AI PR Reviews</title>
+    <title>Xander Maintainer — AI PR Reviews in ~2 Hours</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get thorough AI-powered code reviews for your GitHub pull requests. Fast, affordable, and autonomous.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #0f172a; --text: #e2e8f0; --accent: #38bdf8; --card: #1e293b; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; line-height: 1.6; }
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
-        header { text-align: center; margin-bottom: 3rem; }
-        h1 { font-size: 2.5rem; margin: 0 0 0.5rem 0; color: var(--accent); }
-        .subtitle { font-size: 1.2rem; color: #94a3b8; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-        .card { background: var(--card); border-radius: 12px; padding: 1.5rem; border: 1px solid #334155; }
-        .card h2 { margin-top: 0; color: var(--accent); }
-        .price { font-size: 2rem; font-weight: bold; margin: 1rem 0; }
-        .features { list-style: none; padding: 0; margin: 1rem 0; }
-        .features li { padding: 0.4rem 0; }
-        .features li::before { content: "✓ "; color: #4ade80; }
-        .btn { display: inline-block; background: var(--accent); color: #0f172a; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; }
-        .btn:hover { background: #7dd3fc; }
-        .cta-section { text-align: center; margin: 3rem 0; }
-        .how-it-works { margin: 3rem 0; }
-        .steps { counter-reset: step; display: flex; flex-direction: column; gap: 1rem; }
-        .step { display: flex; gap: 1rem; align-items: flex-start; }
-        .step::before { counter-increment: step; content: counter(step); background: var(--accent); color: #0f172a; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
-        footer { text-align: center; color: #64748b; font-size: 0.9rem; margin-top: 4rem; }
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(90deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Xander Maintainer</h1>
-            <p class="subtitle">AI-powered PR reviews delivered in ~2 hours. Human-quality, machine speed.</p>
-        </header>
+<body class="bg-slate-950 text-slate-200">
 
-        <div class="grid">
-            <div class="card">
-                <h2>Single PR Review</h2>
-                <div class="price">$19</div>
-                <ul class="features">
-                    <li>Deep code analysis</li>
-                    <li>Bug & security detection</li>
-                    <li>Improvement suggestions</li>
-                    <li>Clear verdict (Approve/Changes)</li>
-                    <li>Delivered in ~2 hours</li>
+    <!-- Navbar -->
+    <nav class="border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tight">
+                <span class="gradient-text">Xander</span> Maintainer
+            </div>
+            <div>
+                <a href="#pricing" class="text-slate-300 hover:text-white transition">Pricing</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="max-w-4xl mx-auto px-4 py-24 text-center">
+        <div class="inline-flex items-center gap-2 bg-slate-800/50 border border-slate-700 rounded-full px-4 py-2 text-sm mb-6">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            AI PR reviews delivered in ~2 hours
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-6">
+            Ship better code <span class="gradient-text">faster</span> with AI maintainers.
+        </h1>
+        <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Autonomous code review that finds bugs, security issues, and suggestions. 
+            No waiting for human reviewers. Just send your PR URL, get a detailed report.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="mailto:you@example.com?subject=Get%20started%20with%20Xander%20Maintainer" 
+               class="px-8 py-4 bg-gradient-to-r from-sky-500 to-indigo-600 text-white font-semibold rounded-xl hover:opacity-90 transition">
+                Get Started — $19/PR
+            </a>
+            <a href="#how-it-works" class="px-8 py-4 border border-slate-600 rounded-xl hover:bg-slate-800 transition">
+                See How It Works
+            </a>
+        </div>
+        <p class="mt-4 text-slate-500 text-sm">No credit card required. Pay only when you need a review.</p>
+    </section>
+
+    <!-- Social Proof / Features -->
+    <section class="max-w-6xl mx-auto px-4 py-12">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-slate-800/30 border border-slate-800 rounded-2xl p-6">
+                <div class="text-3xl mb-4">⚡</div>
+                <h3 class="text-xl font-semibold mb-2">Fast Turnaround</h3>
+                <p class="text-slate-400">Reviews delivered in ~2 hours, not days. Keep your sprint velocity high.</p>
+            </div>
+            <div class="bg-slate-800/30 border border-slate-800 rounded-2xl p-6">
+                <div class="text-3xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold mb-2">Deep Analysis</h3>
+                <p class="text-slate-400">AI checks for bugs, security vulnerabilities, test coverage, and code smells.</p>
+            </div>
+            <div class="bg-slate-800/30 border border-slate-800 rounded-2xl p-6">
+                <div class="text-3xl mb-4">💰</div>
+                <h3 class="text-xl font-semibold mb-2">Pay Per Use</h3>
+                <p class="text-slate-400">$19 per PR or $79/mo unlimited. No subscriptions you'll forget about.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="max-w-4xl mx-auto px-4 py-20">
+        <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+        <div class="space-y-12">
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-lg">1</div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">You send the PR link</h3>
+                    <p class="text-slate-400">Just reply to the confirmation email with the GitHub PR URL you want reviewed.</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-lg">2</div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">Xander analyzes the diff</h3>
+                    <p class="text-slate-400">Our AI reads the entire PR, checks changed files, and applies a senior engineer's mental model.</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-violet-500/20 text-violet-400 flex items-center justify-center font-bold text-lg">3</div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-2">You get a Markdown report</h3>
+                    <p class="text-slate-400">Within ~2 hours, you receive a structured review covering bugs, security, suggestions, and a final verdict.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="max-w-4xl mx-auto px-4 py-20">
+        <h2 class="text-3xl font-bold text-center mb-12">Simple Pricing</h2>
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <!-- Single PR -->
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8">
+                <h3 class="text-xl font-semibold mb-2">Single PR Review</h3>
+                <div class="text-4xl font-bold mb-6">$19<span class="text-lg font-normal text-slate-400">/review</span></div>
+                <ul class="space-y-3 mb-8 text-slate-300">
+                    <li>✓ Thorough AI analysis</li>
+                    <li>✓ Bug & security detection</li>
+                    <li>✓ Improvement suggestions</li>
+                    <li>✓ Clear verdict (Approve/Changes)</li>
+                    <li>✓ ~2 hour turnaround</li>
                 </ul>
-                <a href="https://your-lemonsqueezy-link.lemonsqueezy.com/buy" class="btn">Buy Now</a>
+                <a href="mailto:you@example.com?subject=PR%20Review%20Request" 
+                   class="block w-full text-center py-3 bg-sky-600 hover:bg-sky-500 rounded-xl font-semibold transition">
+                    Buy Now
+                </a>
             </div>
-            <div class="card">
-                <h2>Unlimited Monthly</h2>
-                <div class="price">$79/mo</div>
-                <ul class="features">
-                    <li>Unlimited PR reviews</li>
-                    <li>Priority queue</li>
-                    <li>Weekly repo health report</li>
-                    <li>Email support</li>
-                    <li>Cancel anytime</li>
+
+            <!-- Monthly -->
+            <div class="bg-slate-800 border-2 border-indigo-500 rounded-2xl p-8 relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">POPULAR</div>
+                <h3 class="text-xl font-semibold mb-2">Unlimited Monthly</h3>
+                <div class="text-4xl font-bold mb-6">$79<span class="text-lg font-normal text-slate-400">/month</span></div>
+                <ul class="space-y-3 mb-8 text-slate-300">
+                    <li>✓ Unlimited PR reviews</li>
+                    <li>✓ Priority queue</li>
+                    <li>✓ Weekly repo health report</li>
+                    <li>✓ Email support</li>
+                    <li>✓ Cancel anytime</li>
                 </ul>
-                <a href="https://your-lemonsqueezy-link.lemonsqueezy.com/subscribe" class="btn">Subscribe</a>
+                <a href="mailto:you@example.com?subject=Unlimited%20Subscription" 
+                   class="block w-full text-center py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-semibold transition">
+                    Subscribe
+                </a>
             </div>
         </div>
+    </section>
 
-        <div class="how-it-works">
-            <h2>How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div>You send the PR URL (email or chat)</div>
-                </div>
-                <div class="step">
-                    <div>Xander Maintainer analyzes diff, code context, and generates a structured review</div>
-                </div>
-                <div class="step">
-                    <div>Review delivered in Markdown within ~2 hours</div>
-                </div>
-                <div class="step">
-                    <div>You apply changes, request modifications, or merge with confidence</div>
-                </div>
+    <!-- FAQ / Details -->
+    <section class="max-w-3xl mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold mb-6">Questions?</h2>
+        <div class="space-y-6 text-slate-300">
+            <div>
+                <strong class="text-white">How fast is delivery?</strong>
+                <p class="text-slate-400 mt-1">Typically within 2 hours. Larger PRs may take up to 4 hours.</p>
+            </div>
+            <div>
+                <strong class="text-white">Is the AI reliable?</strong>
+                <p class="text-slate-400 mt-1">We use a powerful LLM (StepFun StepFlash) tuned for code review. Every review should be human-verified before merge, but it catches most issues automatically.</p>
+            </div>
+            <div>
+                <strong class="text-white">What if I'm not satisfied?</strong>
+                <p class="text-slate-400 mt-1">We offer refunds within 7 days if the review quality is insufficient.</p>
+            </div>
+            <div>
+                <strong class="text-white">Do you store my code?</strong>
+                <p class="text-slate-400 mt-1">No. We only keep the PR data temporarily to generate the review. Once report is delivered, it's deleted from our cache.</p>
             </div>
         </div>
+    </section>
 
-        <div class="cta-section">
-            <h2>Ready to ship better code faster?</h2>
-            <a href="mailto:you@example.com?subject=Get%20started%20with%20Xander%20Maintainer" class="btn">Get Started</a>
-            <p style="margin-top: 1rem; color: #94a3b8;">Or email directly: you@example.com</p>
-        </div>
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 mt-12 py-12 text-center text-slate-500 text-sm">
+        <p>Xander Maintainer — Built with OpenClaw & StepFun Flash</p>
+        <p class="mt-2">Legal autonomous AI code review service.</p>
+    </footer>
 
-        <footer>
-            <p>Xander Maintainer — Built with OpenClaw & StepFun Flash. Legal, autonomous AI.</p>
-        </footer>
-    </div>
 </body>
 </html>
