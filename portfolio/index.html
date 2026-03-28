@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBOYEE — Autonomous AI Engineer & Security Researcher</title>
+    <meta name="description" content="Portfolio of GBOYEE: builds autonomous AI agents for code review, security automation, and DevOps. Real-world, production-grade systems.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="data:,">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(148, 163, 184, 0.1); }
+        .gradient-text { background: linear-gradient(135deg, #22d3ee, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); }
+        .btn-primary { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
+        .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+        .nav-link { position: relative; }
+        .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: linear-gradient(90deg, #22d3ee, #818cf8); transition: width 0.3s; }
+        .nav-link:hover::after { width: 100%; }
+        a:focus-visible, button:focus-visible { outline: 2px solid #22d3ee; outline-offset: 2px; }
+
+        @media print {
+            header, footer, .btn-primary { display: none; }
+            body { background: white; color: black; }
+            .glass { border: 1px solid #ddd; background: white; }
+            .gradient-text { -webkit-text-fill-color: black; }
+            a { text-decoration: none; color: black; }
+            .card-hover { transform: none; box-shadow: none; }
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 antialiased">
+
+<!-- Header -->
+<header class="fixed top-0 inset-x-0 z-50 glass border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="#" class="font-semibold text-lg tracking-tight">GBOYEE</a>
+        <nav class="hidden md:flex gap-8 text-sm text-slate-400">
+            <a href="#about" class="nav-link">About</a>
+            <a href="#stack" class="nav-link">Stack</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <a href="#contact" class="btn-primary px-5 py-2 rounded-xl text-sm font-medium">Let’s Talk</a>
+    </div>
+</header>
+
+<main class="pt-24">
+
+<!-- Hero -->
+<section id="hero" class="py-32 px-6">
+    <div class="max-w-6xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-sky-500/10 to-indigo-500/10 border border-sky-500/20 rounded-full px-4 py-2 text-sm text-sky-400 mb-8">
+            <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+            Autonomous AI Engineer & Security Researcher
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+            GBOYEE
+        </h1>
+        <p class="text-xl md:text-2xl text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+            Builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps workflows — designed for real-world deployment.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="#projects" class="btn-primary px-10 py-4 text-lg font-semibold text-white rounded-2xl shadow-lg shadow-indigo-500/25 transition">
+                View Projects
+            </a>
+            <a href="#contact" class="px-10 py-4 text-lg font-medium border border-slate-700 hover:border-slate-500 rounded-2xl transition">
+                Get in Touch
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-24 px-6 bg-slate-900/30">
+    <div class="max-w-3xl mx-auto">
+        <h2 class="text-3xl font-bold mb-6">About</h2>
+        <p class="text-slate-300 leading-relaxed mb-6">
+            I design and ship autonomous AI systems that act, not just chat. My work lives at the intersection of <strong class="text-sky-400">LLM‑driven agents</strong>, <strong class="text-sky-400">security automation</strong>, and <strong class="text-sky-400">production‑grade infrastructure</strong>. I specialize in turning research prototypes into reliable, deployable tools that solve concrete engineering problems.
+        </p>
+        <p class="text-slate-300 leading-relaxed">
+            From PR review agents to multi‑agent orchestration frameworks, I own the full stack: prompt engineering, GitHub integration, secure webhook handling, monitoring, and deployment. Security and reliability aren’t afterthoughts — they’re baked in.
+        </p>
+    </div>
+</section>
+
+<!-- Tech Stack -->
+<section id="stack" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-10 text-center">Tech Stack</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-slate-300">
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h3 class="text-lg font-semibold mb-4 text-sky-400">Languages</h3>
+                <ul class="space-y-2">
+                    <li>Python</li>
+                    <li>Bash</li>
+                    <li>JavaScript/Node</li>
+                </ul>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h3 class="text-lg font-semibold mb-4 text-sky-400">AI/ML</h3>
+                <ul class="space-y-2">
+                    <li>Ollama (local LLMs)</li>
+                    <li>OpenAI API</li>
+                    <li>Prompt engineering & RAG</li>
+                </ul>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h3 class="text-lg font-semibold mb-4 text-sky-400">Infrastructure</h3>
+                <ul class="space-y-2">
+                    <li>Nginx, Docker, Linux</li>
+                    <li>SSL/TLS, Cloudflare</li>
+                    <li>systemd, monitoring</li>
+                </ul>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h3 class="text-lg font-semibold mb-4 text-sky-400">GitHub Ecosystem</h3>
+                <ul class="space-y-2">
+                    <li>gh CLI, API, webhooks</li>
+                    <li>GitHub Actions</li>
+                    <li>Automation integration</li>
+                </ul>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h3 class="text-lg font-semibold mb-4 text-sky-400">Security</h3>
+                <ul class="space-y-2">
+                    <li>Secure webhook handling</li>
+                    <li>Rate limiting, auth</li>
+                    <li>Code analysis & threat modeling</li>
+                </ul>
+            </div>
+            <div class="glass rounded-2xl p-6 card-hover">
+                <h3 class="text-lg font-semibold mb-4 text-sky-400">DevOps</h3>
+                <ul class="space-y-2">
+                    <li>CI/CD pipelines</li>
+                    <li>Health endpoints & logging</li>
+                    <li>Infrastructure as code</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="py-24 px-6 bg-slate-900/30">
+    <div class="max-w-6xl mx-auto">
+        <h2 class="text-3xl font-bold mb-10 text-center">Selected Projects</h2>
+        <div class="grid md:grid-cols-2 gap-10">
+
+            <article class="glass rounded-2xl p-8 card-hover flex flex-col h-full">
+                <div class="flex-grow">
+                    <h3 class="text-xl font-semibold mb-3">Xander Maintainer</h3>
+                    <p class="text-slate-400 mb-6">Autonomous AI PR review agent. Fetches diffs via GitHub CLI, generates structured security & quality reviews using local LLMs (Ollama). Includes production hardening: nginx, rate limiting, TLS, health endpoints.</p>
+                    <ul class="text-slate-300 text-sm space-y-2 mb-6">
+                        <li>• Reduces manual review effort by ~80% in testing</li>
+                        <li>• Secure webhook proxy with HMAC validation</li>
+                        <li>• Landing page built with Tailwind, glassmorphism, and conversion‑focused UX</li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <a href="https://github.com/GBOYEE/web3-security-scout" target="_blank" class="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-medium">
+                        View Repository <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="glass rounded-2xl p-8 card-hover flex flex-col h-full">
+                <div class="flex-grow">
+                    <h3 class="text-xl font-semibold mb-3">xander‑operator</h3>
+                    <p class="text-slate-400 mb-6">AI operator with browsing, research, and vector memory capabilities. Modular architecture for tool use and long‑running tasks.</p>
+                    <ul class="text-slate-300 text-sm space-y-2 mb-6">
+                        <li>• Extensible tool system (web search, file ops)</li>
+                        <li>• Vector memory for long‑term context</li>
+                        <li>• Chat + autonomous modes</li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <a href="https://github.com/GBOYEE/xander-operator" target="_blank" class="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-medium">
+                        View Repository <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="glass rounded-2xl p-8 card-hover flex flex-col h-full">
+                <div class="flex-grow">
+                    <h3 class="text-xl font-semibold mb-3">xander‑hive‑framework</h3>
+                    <p class="text-slate-400 mb-6">Multi‑agent orchestration framework with RLHF‑style feedback loops. Coordinates autonomous agents for complex workflows.</p>
+                    <ul class="text-slate-300 text-sm space-y-2 mb-6">
+                        <li>• Hierarchical agent management</li>
+                        <li>• Reward‑based improvement loops</li>
+                        <li>• Pluggable skill system</li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <a href="https://github.com/GBOYEE/xander-hive-framework" target="_blank" class="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-medium">
+                        View Repository <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="glass rounded-2xl p-8 card-hover flex flex-col h-full">
+                <div class="flex-grow">
+                    <h3 class="text-xl font-semibold mb-3">web3‑security‑scout</h3>
+                    <p class="text-slate-400 mb-6">AI‑augmented smart contract vulnerability scanner. Parses Solidity code, runs pattern‑based and LLM‑enhanced analysis, produces actionable reports.</p>
+                    <ul class="text-slate-300 text-sm space-y-2 mb-6">
+                        <li>• Detects reentrancy, overflow, logical bugs</li>
+                        <li>• Integrates with GitHub workflows</li>
+                        <li>• Designed for CI/CD integration</li>
+                    </ul>
+                </div>
+                <div class="mt-auto">
+                    <a href="https://github.com/GBOYEE/web3-security-scout" target="_blank" class="inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-medium">
+                        View Repository <span>→</span>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-32 px-6">
+    <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-6">Let’s Build Together</h2>
+        <p class="text-slate-400 mb-10 text-lg">
+            I’m open to collaborations, consulting, and full‑time roles where I can deploy autonomous AI systems in production.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="mailto:you@example.com" class="btn-primary px-10 py-4 text-lg font-semibold text-white rounded-2xl shadow-lg shadow-indigo-500/25 transition">
+                Email Me
+            </a>
+            <a href="https://github.com/GBOYEE" target="_blank" class="px-10 py-4 text-lg font-medium border border-slate-700 hover:border-slate-500 rounded-2xl transition">
+                GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="border-t border-white/10 py-12 text-center text-slate-500 text-sm">
+    <p>© 2025 GBOYEE. Built with Tailwind & passion.</p>
+</footer>
+
+</body>
+</html>
