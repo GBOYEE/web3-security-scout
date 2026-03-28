@@ -1,0 +1,160 @@
+{
+  "entries": [
+    {
+      "id": "9c17f746cb15",
+      "text": "Review PR #123 in test/repo: Fix bug",
+      "source": "task",
+      "metadata": {
+        "task_id": "090b6b2f-f4b2-4610-b707-29fb446668e4",
+        "type": "research",
+        "status": "in_progress",
+        "created": "2026-03-28T04:32:22.065247",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T20:24:28.615250"
+    },
+    {
+      "id": "f430d13833cb",
+      "text": "Review PR #123 in test/repo: Fix bug",
+      "source": "task",
+      "metadata": {
+        "task_id": "090b6b2f-f4b2-4610-b707-29fb446668e4",
+        "type": "research",
+        "status": "failed",
+        "created": "2026-03-28T04:32:22.065247",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T20:24:28.699902"
+    },
+    {
+      "id": "6248039440fd",
+      "text": "Send CV to Telegram",
+      "source": "task",
+      "metadata": {
+        "task_id": "307c833e-54e3-47b9-9bb5-ea3d041e2cc6",
+        "type": "send_telegram_file",
+        "status": "in_progress",
+        "created": "2026-03-28T18:59:53.616610",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T20:25:32.490522"
+    },
+    {
+      "id": "c8befd4db1e5",
+      "text": "Send CV to Telegram",
+      "source": "task",
+      "metadata": {
+        "task_id": "307c833e-54e3-47b9-9bb5-ea3d041e2cc6",
+        "type": "send_telegram_file",
+        "status": "failed",
+        "created": "2026-03-28T18:59:53.616610",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T20:25:32.744774"
+    },
+    {
+      "id": "19e5bf3c2a1e",
+      "text": "Send CV to Telegram",
+      "source": "task",
+      "metadata": {
+        "task_id": "40ef3f8d-8118-46ca-9361-b171e8788712",
+        "type": "send_telegram_file",
+        "status": "in_progress",
+        "created": "2026-03-28T19:25:16.296768",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T20:26:41.986103"
+    },
+    {
+      "id": "e523d44a3a56",
+      "text": "Send CV to Telegram",
+      "source": "task",
+      "metadata": {
+        "task_id": "40ef3f8d-8118-46ca-9361-b171e8788712",
+        "type": "send_telegram_file",
+        "status": "failed",
+        "created": "2026-03-28T19:25:16.296768",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T20:26:42.097075"
+    },
+    {
+      "id": "9ca2aaf7e11e",
+      "text": "Send CV to Telegram (HTML)",
+      "source": "task",
+      "metadata": {
+        "task_id": "1f07129b-3f56-4808-800b-b4efa111fb79",
+        "type": "send_telegram_file",
+        "status": "in_progress",
+        "created": "2026-03-28T20:07:41.595570",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T21:08:45.465666"
+    },
+    {
+      "id": "5bdf32a8d015",
+      "text": "Send CV to Telegram (HTML)",
+      "source": "task",
+      "metadata": {
+        "task_id": "1f07129b-3f56-4808-800b-b4efa111fb79",
+        "type": "send_telegram_file",
+        "status": "failed",
+        "created": "2026-03-28T20:07:41.595570",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T21:08:46.073131"
+    },
+    {
+      "id": "7e75b3e11efa",
+      "text": "Send CV to Telegram (HTML)",
+      "source": "task",
+      "metadata": {
+        "task_id": "26a97668-fe23-4ff8-ac11-12e465b38e02",
+        "type": "send_telegram_file",
+        "status": "in_progress",
+        "created": "2026-03-28T20:11:54.316874",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T21:12:18.075238"
+    },
+    {
+      "id": "f61e9191a0ec",
+      "text": "Send CV to Telegram (HTML)",
+      "source": "task",
+      "metadata": {
+        "task_id": "26a97668-fe23-4ff8-ac11-12e465b38e02",
+        "type": "send_telegram_file",
+        "status": "failed",
+        "created": "2026-03-28T20:11:54.316874",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T21:12:19.209396"
+    },
+    {
+      "id": "c354b981a62a",
+      "text": "Send CV to Telegram (HTML)",
+      "source": "task",
+      "metadata": {
+        "task_id": "26a97668-fe23-4ff8-ac11-12e465b38e02",
+        "type": "send_telegram_file",
+        "status": "in_progress",
+        "created": "2026-03-28T20:11:54.316874",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T21:13:18.949852"
+    },
+    {
+      "id": "7008e8e538a8",
+      "text": "Send CV to Telegram (HTML)",
+      "source": "task",
+      "metadata": {
+        "task_id": "26a97668-fe23-4ff8-ac11-12e465b38e02",
+        "type": "send_telegram_file",
+        "status": "failed",
+        "created": "2026-03-28T20:11:54.316874",
+        "source": "task"
+      },
+      "timestamp": "2026-03-28T21:13:19.872344"
+    }
+  ]
+}

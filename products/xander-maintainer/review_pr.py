@@ -88,7 +88,7 @@ def fetch_pr_data(owner_repo: str, pr_number: int) -> Dict[str, Any]:
     cmd = [
         "gh", "pr", "view", str(pr_number),
         "--repo", owner_repo,
-        "--json", "title,body,author,baseRefName,headRefName,files,state,createdAt,updatedAt",
+        "--json", "title,body,author,baseRefName,headRefName,files,state,createdAt,updatedAt,number",
         "--jq", "."
     ]
     output = gh_run(cmd)

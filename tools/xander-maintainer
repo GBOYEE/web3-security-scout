@@ -7,7 +7,11 @@ set -euo pipefail
 cd /root/.openclaw/workspace
 
 # Ensure environment
-source .env 2>/dev/null || true
+if [ -f .env ]; then
+    set -a
+    source .env
+    set +a
+fi
 
 # Use xander-operator venv Python explicitly
 VENV_PY="/root/.openclaw/workspace/polish/xander-operator/.venv/bin/python"
