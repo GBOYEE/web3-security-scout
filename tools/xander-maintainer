@@ -8,6 +8,12 @@ cd /root/.openclaw/workspace
 
 # Ensure environment
 source .env 2>/dev/null || true
-export PATH="$PATH:/root/.openclaw/workspace/polish/xander-operator/.venv/bin"
 
-python3 products/xander-maintainer/review_pr.py "$@"
+# Use xander-operator venv Python explicitly
+VENV_PY="/root/.openclaw/workspace/polish/xander-operator/.venv/bin/python"
+if [ -x "$VENV_PY" ]; then
+    exec "$VENV_PY" products/xander-maintainer/review_pr.py "$@"
+else
+    echo "Error: venv Python not found at $VENV_PY" >&2
+    exit 1
+fi
