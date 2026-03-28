@@ -66,15 +66,24 @@ skills:
     enabled: true
     config:
       webhook_secret: "${WEBHOOK_SECRET}"
+  - path: "skills/proactive-coach"
+    enabled: true
+    config:
+      schedule:
+        morning: "08:00"
+        midday: "12:00"
+        evening: "20:00"
+      timezone: "Europe/Berlin"
 
 # Memory & logging
 memory:
   dir: "memory"
   daily_logs: true
   vector_store:
-    enabled: false  # set true if you want semantic search
-    backend: "faiss"  # or "chromadb"
+    enabled: true  # semantic search across memories
+    backend: "faiss"  # lightweight, local
     model: "all-MiniLM-L6-v2"
+  personal_context: "PERSONAL.md"  # continuous learning about you
 
 # LLM caching (xander-operator feature)
 llm_cache:

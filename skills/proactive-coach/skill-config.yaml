@@ -1,0 +1,31 @@
+---
+# Proactive Coach Skill Configuration
+enabled: true
+
+# Schedule (24h format, timezone Europe/Berlin)
+schedule:
+  morning: "08:00"
+  midday: "12:00"
+  evening: "20:00"
+
+# Therapist triggers (case-insensitive)
+therapist_phrases:
+  - "i need to talk"
+  - "i'm feeling down"
+  - "i'm stressed"
+  - "i can't focus"
+  - "help me"
+  - "therapy"
+
+# Mood tags for quick logging
+mood_tags:
+  - "🧘 focused"
+  - "😤 stressed"
+  - "🎉 accomplished"
+  - "🕊️ peaceful"
+  - "😴 tired"
+  - "🔥 motivated"
+
+# Goal tracking
+goals_file: "goals.yaml"
+weekly_review_day: "sunday"
