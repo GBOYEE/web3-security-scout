@@ -74,6 +74,8 @@ skills:
         midday: "12:00"
         evening: "20:00"
       timezone: "Europe/Berlin"
+  - path: "skills/ui-designer"
+    enabled: true
 
 # Memory & logging
 memory:
