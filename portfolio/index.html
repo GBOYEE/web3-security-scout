@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GBOYEE — Autonomous AI Engineer & Security Researcher</title>
-    <meta name="description" content="GBOYEE builds autonomous AI agents for code review, security automation, and DevOps. Real-world, production-grade systems.">
+    <meta name="description" content="GBOYEE builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps — real-world, production-grade.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="GBOYEE — Autonomous AI Engineer & Security Researcher">
-    <meta property="og:description" content="Builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps workflows.">
+    <meta property="og:title" content="GBOYEE — Autonomous AI Engineer">
+    <meta property="og:description" content="Builds autonomous AI agents that act, review, fix, and ship code.">
     <meta property="og:image" content="https://207.180.223.192.nip.io/portfolio/og-image.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="GBOYEE — Autonomous AI Engineer & Security Researcher">
-    <meta name="twitter:description" content="Builds autonomous AI agents that review code, detect vulnerabilities, and automate DevOps workflows.">
+    <meta name="twitter:title" content="GBOYEE — Autonomous AI Engineer">
+    <meta name="twitter:description" content="Builds autonomous AI agents that act, review, fix, and ship code.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="icon" href="data:,">
@@ -20,16 +20,15 @@
             --bg: #020617;
             --card: rgba(30, 41, 59, 0.35);
             --border: rgba(148, 163, 184, 0.12);
-            --accent-cyan: #22d3ee;
-            --accent-indigo: #818cf8;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
+            --accent: #22d3ee;
+            --accent2: #818cf8;
+            --text: #f8fafc;
+            --text2: #94a3b8;
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
+            background: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
         }
         .glass {
@@ -38,34 +37,26 @@
             border: 1px solid var(--border);
         }
         .gradient-text {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .card-hover {
-            transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.25s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-        }
         .btn-primary {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
-            transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         .btn-primary:hover {
-            opacity: 0.92;
             transform: translateY(-2px);
             box-shadow: 0 10px 25px -5px rgba(34, 211, 238, 0.35);
         }
         .nav-link {
             position: relative;
-            color: var(--text-secondary);
+            color: var(--text2);
             transition: color 0.2s;
         }
         .nav-link:hover, .nav-link.active {
-            color: var(--accent-cyan);
+            color: var(--accent);
         }
         .nav-link::after {
             content: '';
@@ -74,43 +65,44 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo));
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            transition: width 0.3s;
         }
         .nav-link:hover::after, .nav-link.active::after {
             width: 100%;
         }
-        a:focus-visible, button:focus-visible {
-            outline: 2px solid var(--accent-cyan);
-            outline-offset: 3px;
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15), transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.15), transparent 40%);
+            z-index: -1;
+            animation: pulse 10s ease-in-out infinite alternate;
         }
-        .hero-title {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-        .section-title {
-            font-size: clamp(1.75rem, 5vw, 2.25rem);
-            letter-spacing: -0.01em;
-            margin-bottom: 2rem;
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
         }
         .project-card {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            transition: transform 0.25s, box-shadow 0.25s;
         }
-        .project-content {
-            flex-grow: 1;
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
         }
         .tag {
             display: inline-block;
             background: rgba(34, 211, 238, 0.12);
-            color: var(--accent-cyan);
+            color: var(--accent);
             border-radius: 9999px;
             padding: 0.25rem 0.75rem;
             font-size: 0.75rem;
             font-weight: 600;
-            margin: 0.25rem 0.25rem 0.25rem 0;
+            margin: 0.25rem;
+        }
+        a:focus-visible, button:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
         }
         @media print {
             header, footer, .btn-primary { display: none; }
@@ -118,14 +110,14 @@
             .glass { background: white; border: 1px solid #eee; }
             .gradient-text { background: none; color: #111; -webkit-text-fill-color: #111; }
             a { color: #111; text-decoration: underline; }
-            .card-hover { transform: none; box-shadow: none; }
-            .nav-link { color: #111; }
-            .nav-link::after { display: none; }
+            .project-card { transform: none; box-shadow: none; }
         }
-        @media (max-width: 640px) {
-            .nav-menu {
-                display: none;
-            }
+        @media (max-width: 768px) {
+            .nav-menu { display: none; }
+            .mobile-menu-btn { display: flex; }
+        }
+        @media (min-width: 768px) {
+            .mobile-menu-btn { display: none; }
         }
     </style>
 </head>
@@ -140,19 +132,35 @@
             <a href="#projects" class="nav-link">Projects</a>
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
-        <a href="#contact" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold">Let’s Talk</a>
+        <div class="flex items-center gap-4">
+            <a href="#contact" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold hidden sm:block">Let’s Talk</a>
+            <button class="mobile-menu-btn md:hidden" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden glass border-t border-white/10">
+        <div class="px-6 py-4 space-y-3 text-sm">
+            <a href="#about" class="block text-gray-300 hover:text-white">About</a>
+            <a href="#stack" class="block text-gray-300 hover:text-white">Stack</a>
+            <a href="#projects" class="block text-gray-300 hover:text-white">Projects</a>
+            <a href="#contact" class="block text-gray-300 hover:text-white">Contact</a>
+        </div>
     </div>
 </header>
 
 <main class="pt-24">
 
-<section id="hero" class="py-32 px-6">
-    <div class="max-w-5xl mx-auto text-center">
+<!-- Hero -->
+<section id="hero" class="relative py-32 px-6">
+    <div class="hero-bg"></div>
+    <div class="max-w-5xl mx-auto text-center relative z-10">
         <div class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-indigo-500/10 border border-cyan-500/20 rounded-full px-4 py-2 text-sm text-cyan-400 mb-8">
             <span class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></span>
             Autonomous AI Engineer & Security Researcher
         </div>
-        <h1 class="hero-title font-extrabold tracking-tight mb-6">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
             GBOYEE
         </h1>
         <p class="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed">
@@ -169,9 +177,10 @@
     </div>
 </section>
 
+<!-- About -->
 <section id="about" class="py-24 px-6 bg-gradient-to-b from-transparent to-slate-900/20">
     <div class="max-w-3xl mx-auto">
-        <h2 class="section-title font-bold">About</h2>
+        <h2 class="text-3xl font-bold mb-6">About</h2>
         <div class="space-y-6 text-gray-300 leading-relaxed">
             <p>
                 I design and ship <strong class="text-cyan-400">autonomous AI systems</strong> that act, not just chat.
@@ -189,170 +198,151 @@
     </div>
 </section>
 
+<!-- Tech Stack -->
 <section id="stack" class="py-24 px-6">
     <div class="max-w-7xl mx-auto">
-        <h2 class="section-title font-bold text-center">Tech Stack</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-300">
-            <div class="glass rounded-2xl p-6 card-hover">
+        <h2 class="text-3xl font-bold mb-10 text-center">Tech Stack</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <!-- Each card is a category with tags -->
+            <div class="glass rounded-2xl p-6 text-center">
                 <h3 class="text-lg font-semibold mb-4 text-cyan-400">Languages</h3>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 justify-center">
                     <span class="tag">Python</span>
                     <span class="tag">Bash</span>
-                    <span class="tag">JavaScript</span>
+                    <span class="tag">JS</span>
                 </div>
             </div>
-            <div class="glass rounded-2xl p-6 card-hover">
+            <div class="glass rounded-2xl p-6 text-center">
                 <h3 class="text-lg font-semibold mb-4 text-cyan-400">AI/ML</h3>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 justify-center">
                     <span class="tag">Ollama</span>
-                    <span class="tag">OpenAI API</span>
-                    <span class="tag">Prompt Eng</span>
+                    <span class="tag">OpenAI</span>
                     <span class="tag">RAG</span>
                 </div>
             </div>
-            <div class="glass rounded-2xl p-6 card-hover">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">Infrastructure</h3>
-                <div class="flex flex-wrap gap-2">
+            <div class="glass rounded-2xl p-6 text-center">
+                <h3 class="text-lg font-semibold mb-4 text-cyan-400">Infra</h3>
+                <div class="flex flex-wrap gap-2 justify-center">
                     <span class="tag">Nginx</span>
                     <span class="tag">Docker</span>
                     <span class="tag">Linux</span>
-                    <span class="tag">SSL/TLS</span>
-                    <span class="tag">Cloudflare</span>
                 </div>
             </div>
-            <div class="glass rounded-2xl p-6 card-hover">
-                <h3 class="text-lg font-semibold mb-4 text-cyan-400">GitHub Ecosystem</h3>
-                <div class="flex flex-wrap gap-2">
+            <div class="glass rounded-2xl p-6 text-center">
+                <h3 class="text-lg font-semibold mb-4 text-cyan-400">GitHub</h3>
+                <div class="flex flex-wrap gap-2 justify-center">
                     <span class="tag">gh CLI</span>
                     <span class="tag">API</span>
                     <span class="tag">Webhooks</span>
-                    <span class="tag">Actions</span>
                 </div>
             </div>
-            <div class="glass rounded-2xl p-6 card-hover">
+            <div class="glass rounded-2xl p-6 text-center">
                 <h3 class="text-lg font-semibold mb-4 text-cyan-400">Security</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="tag">Auth & Rate Limiting</span>
-                    <span class="tag">Input Validation</span>
-                    <span class="tag">Threat Modeling</span>
-                    <span class="tag">Code Analysis</span>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <span class="tag">HMAC</span>
+                    <span class="tag">Rate Limit</span>
+                    <span class="tag">TLS</span>
                 </div>
             </div>
-            <div class="glass rounded-2xl p-6 card-hover">
+            <div class="glass rounded-2xl p-6 text-center">
                 <h3 class="text-lg font-semibold mb-4 text-cyan-400">DevOps</h3>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 justify-center">
                     <span class="tag">CI/CD</span>
-                    <span class="tag">Health Endpoints</span>
-                    <span class="tag">Logging</span>
                     <span class="tag">Monitoring</span>
+                    <span class="tag">Logging</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Projects -->
 <section id="projects" class="py-24 px-6 bg-gradient-to-b from-transparent to-slate-900/20">
     <div class="max-w-7xl mx-auto">
-        <h2 class="section-title font-bold text-center">Selected Projects</h2>
-        <div class="grid md:grid-cols-2 gap-8">
+        <h2 class="text-3xl font-bold mb-10 text-center">Selected Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-            <article class="glass rounded-2xl p-8 card-hover project-card">
-                <div class="project-content">
-                    <h3 class="text-2xl font-semibold mb-3">Xander Maintainer</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        Autonomous AI PR review agent. Fetches diffs via GitHub CLI, generates structured security & quality reviews using local LLMs (Ollama). Includes production hardening: nginx, rate limiting, TLS, health endpoints.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
+            <!-- Xander Maintainer -->
+            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-2">Xander Maintainer</h3>
+                    <p class="text-gray-400 text-sm mb-4">Autonomous AI PR review agent that analyzes diffs, finds bugs/security issues, and posts detailed comments.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tag">Python</span>
-                        <span class="tag">Tailwind</span>
                         <span class="tag">Ollama</span>
                         <span class="tag">Nginx</span>
                     </div>
-                    <ul class="text-gray-300 text-sm space-y-2">
-                        <li>• Reduces manual review effort by ~80% in testing</li>
-                        <li>• Secure webhook proxy with HMAC validation</li>
-                        <li>• Landing page with glassmorphism & conversion‑focused UX</li>
+                    <ul class="text-gray-300 text-xs space-y-1">
+                        <li>• ~2 hour turnaround</li>
+                        <li>• Secure webhooks</li>
+                        <li>• Landing page + CLI</li>
                     </ul>
                 </div>
-                <div class="mt-8 pt-6 border-t border-white/10">
-                    <a href="https://github.com/GBOYEE/web3-security-scout" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
-                        View Repository <span class="text-lg">→</span>
-                    </a>
+                <div class="mt-6 pt-4 border-t border-white/10">
+                    <a href="https://github.com/GBOYEE/web3-security-scout" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">View Repository →</a>
                 </div>
             </article>
 
-            <article class="glass rounded-2xl p-8 card-hover project-card">
-                <div class="project-content">
-                    <h3 class="text-2xl font-semibold mb-3">xander‑operator</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        AI operator with browsing, research, and vector memory capabilities. Modular architecture for tool use and long‑running tasks.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
+            <!-- xander-agent -->
+            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-2">xander‑agent</h3>
+                    <p class="text-gray-400 text-sm mb-4">General‑purpose AI agent with browser automation, research, vector memory, and tool execution.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tag">Python</span>
+                        <span class="tag">Playwright</span>
                         <span class="tag">OpenAI</span>
-                        <span class="tag">Vector DB</span>
-                        <span class="tag">Tools</span>
                     </div>
-                    <ul class="text-gray-300 text-sm space-y-2">
-                        <li>• Extensible tool system (web search, file ops)</li>
-                        <li>• Vector memory for long‑term context</li>
-                        <li>• Chat + autonomous modes</li>
+                    <ul class="text-gray-300 text-xs space-y-1">
+                        <li>• Browse & act</li>
+                        <li>• Vector memory</li>
+                        <li>• Modular tools</li>
                     </ul>
                 </div>
-                <div class="mt-8 pt-6 border-t border-white/10">
-                    <a href="https://github.com/GBOYEE/xander-operator" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
-                        View Repository <span class="text-lg">→</span>
-                    </a>
+                <div class="mt-6 pt-4 border-t border-white/10">
+                    <a href="https://github.com/GBOYEE/xander-operator" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">View Repository →</a>
                 </div>
             </article>
 
-            <article class="glass rounded-2xl p-8 card-hover project-card">
-                <div class="project-content">
-                    <h3 class="text-2xl font-semibold mb-3">xander‑hive‑framework</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        Multi‑agent orchestration framework with RLHF‑style feedback loops. Coordinates autonomous agents for complex workflows.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
+            <!-- openclaw-core -->
+            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-2">OpenClaw Core</h3>
+                    <p class="text-gray-400 text-sm mb-4">Secure gateway and orchestration layer for AI agents — auth, rate limiting, health endpoints.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
                         <span class="tag">Python</span>
-                        <span class="tag">RLHF</span>
-                        <span class="tag">Agents</span>
-                        <span class="tag">Mesh</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Security</span>
                     </div>
-                    <ul class="text-gray-300 text-sm space-y-2">
-                        <li>• Hierarchical agent management</li>
-                        <li>• Reward‑based improvement loops</li>
-                        <li>• Pluggable skill system</li>
+                    <ul class="text-gray-300 text-xs space-y-1">
+                        <li>• HMAC validation</li>
+                        <li>• Rate limiting</li>
+                        <li>• Production hardened</li>
                     </ul>
                 </div>
-                <div class="mt-8 pt-6 border-t border-white/10">
-                    <a href="https://github.com/GBOYEE/xander-hive-framework" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
-                        View Repository <span class="text-lg">→</span>
-                    </a>
+                <div class="mt-6 pt-4 border-t border-white/10">
+                    <a href="https://github.com/GBOYEE/openclaw" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">View Repository →</a>
                 </div>
             </article>
 
-            <article class="glass rounded-2xl p-8 card-hover project-card">
-                <div class="project-content">
-                    <h3 class="text-2xl font-semibold mb-3">web3‑security‑scout</h3>
-                    <p class="text-gray-400 mb-6 leading-relaxed">
-                        AI‑augmented smart contract vulnerability scanner. Parses Solidity code, runs pattern‑based and LLM‑enhanced analysis, produces actionable reports.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
+            <!-- HiveSec Ecosystem Hub -->
+            <article class="glass rounded-2xl p-6 project-card flex flex-col">
+                <div class="flex-1">
+                    <h3 class="text-xl font-semibold mb-2">HiveSec Ecosystem Hub</h3>
+                    <p class="text-gray-400 text-sm mb-4">Streamlit dashboard for multi‑agent security operations. Visualizes agent outputs and threat feeds.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="tag">Streamlit</span>
                         <span class="tag">Python</span>
-                        <span class="tag">Solidity</span>
-                        <span class="tag">GitHub Actions</span>
-                        <span class="tag">LLM</span>
+                        <span class="tag">Plotly</span>
                     </div>
-                    <ul class="text-gray-300 text-sm space-y-2">
-                        <li>• Detects reentrancy, overflow, logical bugs</li>
-                        <li>• Integrates with GitHub workflows</li>
-                        <li>• Designed for CI/CD integration</li>
+                    <ul class="text-gray-300 text-xs space-y-1">
+                        <li>• Real‑time ops</li>
+                        <li>• Agent viz</li>
+                        <li>• Threat intel</li>
                     </ul>
                 </div>
-                <div class="mt-8 pt-6 border-t border-white/10">
-                    <a href="https://github.com/GBOYEE/web3-security-scout" target="_blank" class="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold">
-                        View Repository <span class="text-lg">→</span>
-                    </a>
+                <div class="mt-6 pt-4 border-t border-white/10">
+                    <a href="https://github.com/GBOYEE/HiveSec-Ecosystem-Hub" target="_blank" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium">View Repository →</a>
                 </div>
             </article>
 
@@ -360,6 +350,7 @@
     </div>
 </section>
 
+<!-- Contact -->
 <section id="contact" class="py-32 px-6">
     <div class="max-w-3xl mx-auto text-center">
         <h2 class="text-4xl font-bold mb-6">Let’s Build Together</h2>
@@ -387,7 +378,8 @@
 </footer>
 
 <script>
-    // Smooth active nav on scroll
+    // Mobile menu toggle
+    // Scroll spy for nav links
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
     window.addEventListener('scroll', () => {
