@@ -22,10 +22,10 @@ import time
 import logging
 from pathlib import Path
 from datetime import datetime
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 
 # Add xander-operator to path
-sys.path.insert(0, str(Path(__file__).parent.parent / "polish" / "xander-operator"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "polish" / "xander-operator"))
 
 from xander_operator.llm import generate_response
 
@@ -88,7 +88,7 @@ def fetch_pr_data(owner_repo: str, pr_number: int) -> Dict[str, Any]:
     cmd = [
         "gh", "pr", "view", str(pr_number),
         "--repo", owner_repo,
-        "--json", "title,body,user,base,head,files,comments,reviews,repository,state,createdAt,updatedAt",
+        "--json", "title,body,author,baseRefName,headRefName,files,state,createdAt,updatedAt",
         "--jq", "."
     ]
     output = gh_run(cmd)
@@ -100,24 +100,26 @@ def fetch_pr_diff(owner_repo: str, pr_number: int) -> str:
     cmd = ["gh", "pr", "diff", str(pr_number), "--repo", owner_repo]
     return gh_run(cmd)
 
-def build_review_prompt(pr_data: Dict[str, Any], diff: str) -> str:
+def build_review_prompt(owner_repo: str, pr_data: Dict[str, Any], diff: str) -> str:
     title = pr_data["title"]
     body = pr_data.get("body", "(no description)")
-    author = pr_data["user"]["login"]
+    author = pr_data["author"]["login"]
     files_changed = len(pr_data.get("files", []))
-    base = pr_data["base"]["ref"]
-    head = pr_data["head"]["ref"]
-    repo_name = pr_data["repository"]["full_name"]
+    base = pr_data["baseRefName"]
+    head = pr_data["headRefName"]
+    pr_number = pr_data["number"]
+    state = pr_data.get("state")
+    created = pr_data.get("createdAt")
 
     return f"""You are a senior code reviewer. Analyze this pull request thoroughly.
 
 ## Context
-Repository: {repo_name}
-PR #{pr_data.get('number', '?')}: {title}
+Repository: {owner_repo}
+PR #{pr_number}: {title}
 Author: {author}
 Branch: {head} → {base}
-State: {pr_data.get('state')}
-Created: {pr_data.get('createdAt')}
+State: {state}
+Created: {created}
 
 ## Description
 {body}
@@ -144,8 +146,8 @@ Be concise but specific. Reference file names and line numbers.
 
 Output only Markdown. No extra commentary.""".strip()
 
-def generate_ai_review(pr_data: Dict[str, Any], diff: str) -> str:
-    prompt = build_review_prompt(pr_data, diff)
+def generate_ai_review(pr_data: Dict[str, Any], diff: str, owner_repo: str) -> str:
+    prompt = build_review_prompt(owner_repo, pr_data, diff)
     model = os.getenv("OPENAI_MODEL", "stepfun/step-1-flash")
     log.info(f"Generating review using {model}")
     
@@ -160,20 +162,19 @@ def generate_ai_review(pr_data: Dict[str, Any], diff: str) -> str:
         raise RuntimeError("AI did not return a review")
     return response
 
-def compose_report(pr_data: Dict[str, Any], ai_review: str) -> str:
-    repo_name = pr_data["repository"]["full_name"]
+def compose_report(pr_data: Dict[str, Any], ai_review: str, owner_repo: str) -> str:
     pr_number = pr_data["number"]
     title = pr_data["title"]
-    author = pr_data["user"]["login"]
-    base = pr_data["base"]["ref"]
-    head = pr_data["head"]["ref"]
+    author = pr_data["author"]["login"]
+    base = pr_data["baseRefName"]
+    head = pr_data["headRefName"]
     files_count = len(pr_data.get("files", []))
     model = os.getenv("OPENAI_MODEL", "stepfun/step-1-flash")
 
     return f"""# AI PR Review — Xander Maintainer
 
 > PR #{pr_number}: {title}
-> Repository: {repo_name}
+> Repository: {owner_repo}
 > Generated: {datetime.now():%Y-%m-%d %H:%M} (Europe/Berlin)
 
 {ai_review}
@@ -222,8 +223,8 @@ def main():
         diff = fetch_pr_diff(owner_repo, pr_number)
 
         # Generate
-        ai_review = generate_ai_review(pr_data, diff)
-        report = compose_report(pr_data, ai_review)
+        ai_review = generate_ai_review(pr_data, diff, owner_repo)
+        report = compose_report(pr_data, ai_review, owner_repo)
 
         # Output
         if args.output:
@@ -238,7 +239,7 @@ def main():
                 "pr": pr_number,
                 "repo": owner_repo,
                 "title": pr_data["title"],
-                "author": pr_data["user"]["login"],
+                "author": pr_data["author"]["login"],
                 "generated_at": datetime.now().isoformat(),
                 "model": os.getenv("OPENAI_MODEL", "stepfun/step-1-flash")
             }
@@ -249,6 +250,8 @@ def main():
 
     except Exception as e:
         log.error(f"Failed: {e}")
+        import traceback
+        log.debug(traceback.format_exc())
         if args.json:
             print(json.dumps({"error": str(e)}), file=sys.stderr)
         return 1
