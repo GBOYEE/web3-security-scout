@@ -1,0 +1,112 @@
+---
+# OpenClaw Configuration with GitHub Integration
+# Copy to: /root/.openclaw/workspace/config.yaml
+
+version: "1.0"
+
+# Agent personality (XANDER)
+agents:
+  - name: "xander"
+    model: "openrouter/auto"
+    temperature: 0.7
+    max_steps: 15
+    system_prompt: |
+      You are XANDER, a safety-first AI operator with eyes & hands.
+      You can browse the web, fill forms, conduct research, and generate reports.
+      You always validate tasks before execution and request approval for sensitive actions.
+      You think step-by-step, document everything, and never assume.
+      When handling GitHub events, be concise, helpful, and professional.
+    tools:
+      - "xander_operator.cli"
+    capabilities:
+      - execute_commands
+      - web_search
+      - web_browse
+      - http_requests
+      - file_read
+      - file_write
+
+# Channels: where you interact with the agent
+channels:
+  # Your primary chat channel (Telegram example)
+  telegram:
+    enabled: true
+    token: "${TELEGRAM_BOT_TOKEN}"
+    # ... other Telegram settings
+
+  # GitHub webhook channel
+  github:
+    enabled: true
+    # Authentication: either gh CLI or a token
+    # If gh CLI is installed and authenticated on host, no token needed.
+    # Otherwise set GH_TOKEN env var.
+    # token: "${GH_TOKEN}"
+
+    # Public URL where GitHub sends webhooks
+    webhook_url: "${OPENCLAW_URL}/hooks/github"
+    webhook_secret: "${WEBHOOK_SECRET}"
+
+    # Subscribe to these events
+    events:
+      - "pull_request"
+      - "push"
+      - "workflow_run"
+      - "issues"
+      - "issue_comment"
+      - "release"
+
+    # Optional: filter repositories (if empty, all accessible repos)
+    # repos:
+    #   - "GBOYEE/xander-operator"
+    #   - "GBOYEE/web3-security-scout"
+
+# Skills to load on startup
+skills:
+  - path: "skills/github-automation"
+    enabled: true
+    config:
+      webhook_secret: "${WEBHOOK_SECRET}"
+
+# Memory & logging
+memory:
+  dir: "memory"
+  daily_logs: true
+  vector_store:
+    enabled: false  # set true if you want semantic search
+    backend: "faiss"  # or "chromadb"
+    model: "all-MiniLM-L6-v2"
+
+# LLM caching (xander-operator feature)
+llm_cache:
+  enabled: true
+  ttl_days: 7
+
+# Reporting
+reports:
+  enabled: true
+  output_dir: "memory/reports"
+  schedule: "daily"  # or "weekly"
+
+# Security
+security:
+  require_approval_for:
+    - "fill_actions"
+    - "sensitive_commands"
+  sandbox_commands: true
+  allowed_commands:
+    - "git"
+    - "gh"
+    - "playwright"
+    - "curl"
+    - "python"
+
+# Gateway / web server
+gateway:
+  host: "0.0.0.0"
+  port: 18789
+  # If exposing to internet, put behind reverse proxy with TLS
+  # nginx/Caddy can handle SSL termination
+  tls:
+    enabled: false
+    cert_file: ""
+    key_file: ""

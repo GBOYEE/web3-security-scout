@@ -1,0 +1,27 @@
+---
+# Skill: GitHub Automation (xander-operator backend)
+
+# Enable this skill to process GitHub webhooks and execute tasks via xander-operator
+enabled: true
+
+# This skill acts as a webhook handler for GitHub events
+webhook:
+  path: "/hooks/github"  # the endpoint GitHub will call
+  handler: "skills/github-automation/github_webhook.py:webhook_handler"
+  secret_env: "GITHUB_WEBHOOK_SECRET"
+
+# Required environment variables (see .env.github.example)
+env:
+  - "GITHUB_WEBHOOK_SECRET"
+  - "GH_TOKEN"          # optional if gh CLI already authenticated
+  - "OPENAI_API_KEY"    # optional, for LLM research
+  - "OLLAMA_BASE_URL"   # optional, for local LLM
+
+# Description for agents
+description: |
+  Automated GitHub workflows (PR reviews, CI alerts, issue triage) using xander-operator.
+  Requires: gh CLI auth or GH_TOKEN, xander-operator installed.
+
+# Rate limiting (optional)
+rate_limit:
+  max_per_minute: 30

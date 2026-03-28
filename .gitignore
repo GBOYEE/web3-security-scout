@@ -1,0 +1,13 @@
+# Ignore generated artifacts
+memory/*.db
+memory/reports/
+__pycache__/
+*.pyc
+.env
+config.local.yaml
+.DS_Store
+.vscode/
+.idea/
+polish/*/.venv/
+polish/*/dist/
+polish/*/*.egg-info/

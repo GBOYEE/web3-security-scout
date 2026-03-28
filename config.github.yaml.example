@@ -1,0 +1,55 @@
+# OpenClaw Configuration — GitHub Integration
+
+# Save as: /root/.openclaw/workspace/config.yaml
+
+# Agent personality
+agents:
+  - name: "xander"
+    soul: |
+      You are XANDER, a safety-first AI operator.
+      You browse the web, fill forms, run research tasks, and generate reports.
+      You always validate tasks before execution and request human approval for sensitive actions.
+      You think step-by-step and document everything.
+    tools:
+      - "xander_operator.cli"
+    model: "openrouter/auto"
+    max_steps: 10
+
+# Channels
+channels:
+  telegram:  # your existing chat channel
+    enabled: true
+    # ... your existing Telegram config
+
+  github:
+    enabled: true
+    # Authentication: uses gh CLI on the host (recommended) or a PAT via env var
+    # Ensure `gh auth login` works for the user running OpenClaw.
+    # Alternatively set GH_TOKEN env var.
+    # token: ${GH_TOKEN}  # optional if gh CLI already authenticated
+
+    # Webhook endpoint (public URL where GitHub will send events)
+    # Example: https://your-domain.com/hooks/github
+    webhook_url: ${OPENCLAW_URL}/hooks/github
+
+    # Secret token to verify webhook signatures (generate a strong random string)
+    webhook_secret: ${WEBHOOK_SECRET}
+
+    # Which events to listen for (prune to only what you need)
+    events:
+      - "pull_request"
+      - "push"
+      - "workflow_run"
+      - "issues"
+      - "issue_comment"
+
+    # Repositories to monitor (optional, if empty all accessible repos)
+    # repos:
+    #   - "GBOYEE/xander-operator"
+    #   - "GBOYEE/web3-security-scout"
+
+# Global settings
+settings:
+  working_directory: "/root/.openclaw/workspace"
+  memory_dir: "memory"
+  log_level: "INFO"
