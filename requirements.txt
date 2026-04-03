@@ -1,0 +1,3 @@
+# Pin runtime dependencies here (if any)
+# Currently, web3-security-scout has no external runtime dependencies.
+# Dev dependencies (pytest, ruff) are installed in CI explicitly.
