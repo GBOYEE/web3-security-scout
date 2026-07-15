@@ -1,0 +1,12 @@
+LICENSE
+README.md
+pyproject.toml
+src/scanner/__init__.py
+src/scanner/cli.py
+src/scanner/core.py
+src/web3_security_scout.egg-info/PKG-INFO
+src/web3_security_scout.egg-info/SOURCES.txt
+src/web3_security_scout.egg-info/dependency_links.txt
+src/web3_security_scout.egg-info/entry_points.txt
+src/web3_security_scout.egg-info/top_level.txt
+tests/test_scanner.py
